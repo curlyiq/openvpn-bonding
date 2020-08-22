@@ -48,7 +48,8 @@ do
 
     # we replace the @port placeholder with ports 1191, 1192, 1193 and so on
 
-    sed -i s/@port/119${counter}/g $vpnConfigFile
+   # sed -i s/@port/119${counter}/g $vpnConfigFile
+    sed -i s/@port/1100${counter}/g $vpnConfigFile
 
     # enable the corresponding system unit
 
