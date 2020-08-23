@@ -2,18 +2,15 @@
 # change the number of tunnels here
 # and also you might need to change the interface names
 
-numberOfTunnels=2
+numberOfTunnels=1
 
 tunnelInterface1=wlan0
-tunnelInterface2=wlan1
-tunnelInterface3=eth0
-tunnelInterface4=eth1
 
 # you will need to change this as well.
 # this is the name or IP address of your VPN Server
 # alternatively you can just make an entry in /etc/hosts
 
-vpnServer=myVPNServer
+vpnServer=3.86.218.102
 
 # You probably do not need to change any of these
 

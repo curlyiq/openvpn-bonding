@@ -82,4 +82,4 @@ done
 echo "the routing table is as follows:"
 cat /etc/iproute2/rt_tables
 
-
+cp ~/openvpn-bonding/ta.ky /etc/openvpn/.
