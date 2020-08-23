@@ -72,4 +72,4 @@ sysctl -p
 # we only generate a new key if none is present.
 # if a ta.key exists, we will use the existing one
 
-cp ~/openvpn-bonding/ta.ky /etc/openvpn/.
+cp ~/openvpn-bonding/ta.key /etc/openvpn/.
