@@ -24,9 +24,6 @@ apt update && apt -y install openvpn openssl bridge-utils sed
 # copy all necessary files into the openvpn config
 # directory
 
-cp commonConfig   /etc/openvpn
-cp startbond.sh /etc/openvpn
-cp stopbond.sh  /etc/openvpn
 
 for counter in `seq 1 $numberOfTunnels`;
 do

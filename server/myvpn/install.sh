@@ -27,9 +27,9 @@ apt update && apt -y install openvpn openssl bridge-utils sed
 #yum -y install openvpn openssl bridge-utils sed
 # mkdir -p /etc/openvpn/certs
 
-cp commonConfig   /etc/openvpn
-cp startbond.sh /etc/openvpn
-cp stopbond.sh  /etc/openvpn
+#cp commonConfig   /etc/openvpn
+#cp startbond.sh /etc/openvpn
+#cp stopbond.sh  /etc/openvpn
 
 
 # now create a config file for each server instance 

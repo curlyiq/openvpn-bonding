@@ -1,0 +1,14 @@
+    # these will be replaced by the installation script
+
+    dev @dev
+    #ifconfig @ip @mask
+    port @port
+
+
+    # these are default for all connections
+
+    secret /etc/openvpn/ta.key
+    proto udp4
+    verb 4
+    keepalive 15 60
+    mute 50
