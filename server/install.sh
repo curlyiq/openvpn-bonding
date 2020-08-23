@@ -20,11 +20,11 @@
 
 # first install the necessary software
 
-#apt update && apt -y install openvpn openssl bridge-utils sed
-yum  update 
-sudo yum install -y epel-release
-sudo yum update -y # why twice - suggest on some website
-yum -y install openvpn openssl bridge-utils sed
+apt update && apt -y install openvpn openssl bridge-utils sed
+#yum  update 
+#sudo yum install -y epel-release
+#sudo yum update -y # why twice - suggest on some website
+#yum -y install openvpn openssl bridge-utils sed
 # mkdir -p /etc/openvpn/certs
 
 cp commonConfig   /etc/openvpn
@@ -53,7 +53,7 @@ do
 
     # we replace the @port placeholder with ports 1191, 1192, 1193 and so on
 
-    sed -i s/@port/1100${counter}/g $vpnConfigFile
+    sed -i s/@port/119${counter}/g $vpnConfigFile
 
     # enable the corresponding system unit
 

@@ -47,11 +47,12 @@ ip link set $bondInterface up mtu 1440
 # now find the WAN interface
 
 export OUR_OWN_IP=`sudo -u nobody curl -s ipinfo.io/ip`
-#readarray -d " " -t templine <<< $(ip -br addr | grep $OUR_OWN_IP)
-#export OUR_WAN_INTERFACE=${templine[0]}
-readarray -t templine <<< $(ip -br addr | grep $OUR_OWN_IP)
-temp=$(echo $templine[0] | awk '{print $1}')
-export OUR_WAN_INTERFACE=$temp
+readarray -d " " -t templine <<< $(ip -br addr | grep $OUR_OWN_IP)
+export OUR_WAN_INTERFACE=${templine[0]}
+
+#readarray -t templine <<< $(ip -br addr | grep $OUR_OWN_IP)
+#temp=$(echo $templine[0] | awk '{print $1}')
+#export OUR_WAN_INTERFACE=$temp
 
 # now add the masquerading rules
 
