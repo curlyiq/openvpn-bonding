@@ -1,0 +1,55 @@
+#dev @dev
+#port @port
+#secret /etc/openvpn/ta.key
+#proto udp4
+#verb 4
+#keepalive 15 60
+#mute 50
+
+# ---------------------------
+# local 172.31.44.131
+local @natIP 
+
+# proto udp
+proto udp
+
+# dev tun
+dev @devType
+# server 10.8.0.0 255.255.255.0
+server @devIP @devMask
+
+# port 1194
+port @devPort
+
+
+
+#ca ca.crt
+#cert server.crt
+#key server.key
+#dh dh.pem
+#auth SHA512
+#tls-crypt tc.key
+secret /etc/openvpn/ta.key
+
+topology subnet
+
+
+# Force all traffic from the client to get directed to the VPN server
+push "redirect-gateway def1 bypass-dhcp"
+
+#ifconfig-pool-persist ipp.txt
+
+#  Google DNS Server address
+push "dhcp-option DNS 8.8.8.8"
+push "dhcp-option DNS 8.8.4.4"
+
+keepalive 10 120
+#cipher AES-256-CBC
+#user nobody
+#group nogroup
+#persist-key
+#persist-tun
+#status openvpn-status.log
+verb 3
+#crl-verify crl.pem
+explicit-exit-notify

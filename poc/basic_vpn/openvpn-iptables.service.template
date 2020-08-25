@@ -1,0 +1,15 @@
+[Unit]
+Before=network.target
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/iptables -t nat -A POSTROUTING -s @devIP/24 ! -d @devIP/24 -j SNAT --to @natIP 
+ExecStart=/usr/sbin/iptables -I INPUT -p udp --dport @devPort -j ACCEPT
+ExecStart=/usr/sbin/iptables -I FORWARD -s @devIP/24 -j ACCEPT
+ExecStart=/usr/sbin/iptables -I FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+ExecStop=/usr/sbin/iptables -t nat -D POSTROUTING -s @devIP/24 ! -d @devIP/24 -j SNAT --to @natIP 
+ExecStop=/usr/sbin/iptables -D INPUT -p udp --dport @devPort -j ACCEPT
+ExecStop=/usr/sbin/iptables -D FORWARD -s @devIP/24 -j ACCEPT
+ExecStop=/usr/sbin/iptables -D FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target
