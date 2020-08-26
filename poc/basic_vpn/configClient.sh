@@ -35,9 +35,9 @@ for counter in `seq 1 $numberOfTunnels`;
 do
  clientConfigFile=./out/clients/client${counter}.conf
  cp ./client.conf.template $clientConfigFile 
- sed -i s/@devType/"${devType}"/g $clientConfigFile
+ sed -i s/@devType/"${devType}${counter}"/g $clientConfigFile
  sed -i s/@externalIP/"${externalIP}"/g $clientConfigFile
- sed -i s/@devPort/"${devPort}${counter}"/g    $iptablesServiceFile
+ sed -i s/@devPort/"${devPort}${counter}"/g   $clientConfigFile
 done
 
 

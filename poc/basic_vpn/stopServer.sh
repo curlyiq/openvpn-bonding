@@ -6,3 +6,5 @@ do
   systemctl stop openvpn-iptables${counter}.service
   systemctl stop openvpn-server@server${counter}.service
 done
+
+rm -r ./out

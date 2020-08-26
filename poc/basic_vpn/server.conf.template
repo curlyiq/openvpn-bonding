@@ -15,6 +15,7 @@ proto udp
 
 # dev tun
 dev @devType
+
 # server 10.8.0.0 255.255.255.0
 server @devIP @devMask
 
@@ -23,13 +24,14 @@ port @devPort
 
 
 
-#ca ca.crt
-#cert server.crt
-#key server.key
-#dh dh.pem
-#auth SHA512
-#tls-crypt tc.key
-secret /etc/openvpn/ta.key
+ca ca.crt
+cert server.crt
+key server.key
+dh dh.pem
+auth SHA512
+
+tls-crypt tc.key
+#secret /etc/openvpn/ta.key
 
 topology subnet
 
