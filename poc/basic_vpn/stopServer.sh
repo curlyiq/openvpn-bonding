@@ -8,3 +8,4 @@ do
 done
 
 rm -r ./out
+rm -r /etc/openvpn/server/*

@@ -9,6 +9,7 @@ devIPBase="10.8.0"
 devIP="${devIPBase}.0"
 devPort="119"  # Base port for dev interface. Counter will add the last digit
 devMask="255.255.255.0"
+client="vk"
 
 # Local Directory
 mkdir ./out
@@ -24,11 +25,23 @@ natIP=$(hostname -i)
 #natIP=$(ip -4 addr | grep inet | grep -vE '127(\.[0-9]{1,3}){3}' | cut -d '/' -f 1 | grep -oE '[0-9]{1,3}(\.[0-9]{1,3}){3}')
 externalIP=$(curl -s ipinfo.io/ip)
 
-# Routing - Forwarding
-sysctl -w net.ipv4.ip_forward=1  # enable ip4 forwarding
 
-# Keys
-openvpn --genkey --secret ./out/ta.key
+mergeCert () {
+		echo "<ca>"
+		cat /etc/openvpn/server/easy-rsa/pki/ca.crt
+		echo "</ca>"
+		echo "<cert>"
+		sed -ne '/BEGIN CERTIFICATE/,$ p' /etc/openvpn/server/easy-rsa/pki/issued/"$client".crt
+		echo "</cert>"
+		echo "<key>"
+		cat /etc/openvpn/server/easy-rsa/pki/private/"$client".key
+		echo "</key>"
+		echo "<tls-crypt>"
+		sed -ne '/BEGIN OpenVPN Static key/,$ p' /etc/openvpn/server/tc.key
+		echo "</tls-crypt>"
+	} > ./out/clients/mergedCert.txt
+echo " ============================================================="
+mergeCert
 
 # Firewall iptables service
 for counter in `seq 1 $numberOfTunnels`;
@@ -38,6 +51,10 @@ do
  sed -i s/@devType/"${devType}${counter}"/g $clientConfigFile
  sed -i s/@externalIP/"${externalIP}"/g $clientConfigFile
  sed -i s/@devPort/"${devPort}${counter}"/g   $clientConfigFile
+
+# keys
+sed -i '/#mycerts/ r ./out/clients/mergedCert.txt' $clientConfigFile
+
 done
 
 
