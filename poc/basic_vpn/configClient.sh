@@ -54,7 +54,7 @@ do
 
 # keys
 sed -i '/#mycerts/ r ./out/clients/mergedCert.txt' $clientConfigFile
-
+cp $clientConfigFile ./vk.ovpn
 done
 
 
